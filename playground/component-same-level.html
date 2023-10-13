@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <app-header v-bind:data="num"></app-header>
+    <app-footer v-on:increase="increaseNum"></app-footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+
+    var appHeader = {
+      template: '<div><button>header {{ data }}</button></div>',
+      props: ['data']  
+    }
+
+    var appFooter = {
+      template: '<div><button v-on:click="increaseNum">footer</button></div>',
+      methods: {
+        increaseNum: function() {
+          this.$emit('increase', 10);
+        }
+      }
+    }
+
+    // component
+    // instance
+    new Vue({
+      el: '#app',
+      components: {
+        'app-header': appHeader,
+        'app-footer': appFooter
+      },
+      methods: {
+        increaseNum: function(param) {
+          console.log(param);
+          this.num = this.num + param;
+        }
+      },
+      data: {
+        num: 10,
+        value: 20,
+      },
+    });
+  </script>
+</body>
+</html>
