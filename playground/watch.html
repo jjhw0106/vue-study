@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="addNum">increase</button>
+    <p>{{ num }}</p>
+    <p>{{ after }}</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num: 10
+      },
+      // num에 수정이 있을 때마다 logText가 실행된다.
+      watch: {
+        num: function() {
+          this.logText();
+        }
+      },
+      computed: {
+        after: function() {
+          return this.num*2
+        }
+      },
+      methods: {
+        addNum: function() {
+          this.num++;
+          this.logText();
+        },
+        logText: function() {
+          console.log('changed');
+        }
+      },
+
+    })
+  </script>
+</body>
+</html>
